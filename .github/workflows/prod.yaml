@@ -1,0 +1,54 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+
+  lint:
+    name: Run Linter
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Linting
+        run: echo Linted!
+        
+  test:
+    name: Run Automated Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Testing
+        run: echo Tested!
+        
+  staging:
+    name: Deploy to Staging
+    needs:
+      - lint
+      - test
+    runs-on: ubuntu-latest
+    environment:
+      name: Staging
+      url: "https://simon.weizman.us"
+    steps:
+      - name: Deploy
+        run: echo Deploying!
+    
+  production:
+    name: Deploy to Production
+    needs: staging
+    runs-on: ubuntu-latest
+    environment:
+      name: Production
+      url: "https://simon.weizman.dev"
+    steps:
+      - name: Deploy
+        run: echo Deploying!
