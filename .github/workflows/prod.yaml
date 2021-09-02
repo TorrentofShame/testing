@@ -31,6 +31,7 @@ jobs:
         
   staging:
     name: Deploy to Staging
+    concurrency: staging_environment
     needs:
       - lint
       - test
@@ -44,6 +45,7 @@ jobs:
     
   production:
     name: Deploy to Production
+    concurrency: production_environment
     needs: staging
     runs-on: ubuntu-latest
     environment:
