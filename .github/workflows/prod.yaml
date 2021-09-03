@@ -41,8 +41,13 @@ jobs:
       name: Staging
       url: "https://simon.weizman.us"
     steps:
-      - name: Deploy
-        run: echo Deploying!
+      - name: Deploy to Cloudflare Pages
+        uses: Cyb3r-Jak3/actions-cloudflare-pages@<Latest Release>
+        with:
+          account: ${{ secrets.CLOUDFLARE_ACCOUNT }}
+          project: ${{ secrets.CLOUDFLARE_PROJECT }}
+          email: ${{ secrets.CLOUDFLARE_EMAIL }}
+          global_token: ${{ secrets.CLOUDFLARE_KEY }}    
     
   production:
     name: Deploy to Production
