@@ -16,7 +16,6 @@ jobs:
     name: Run Linter
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
       
       - name: Linting
         run: echo Linted!
@@ -25,10 +24,17 @@ jobs:
     name: Run Automated Tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
       
       - name: Testing
         run: echo Tested!
+        
+      - name: Deploy to Cloudflare Pages
+        uses: Cyb3r-Jak3/actions-cloudflare-pages@v1.0.1
+        with:
+          account: ${{ secrets.CLOUDFLARE_ACCOUNT }}
+          project: ${{ secrets.CLOUDFLARE_PROJECT }}
+          email: ${{ secrets.CLOUDFLARE_EMAIL }}
+          global_token: ${{ secrets.CLOUDFLARE_KEY }}    
         
   staging:
     name: Deploy to Staging
