@@ -42,7 +42,7 @@ jobs:
       url: "https://simon.weizman.us"
     steps:
       - name: Deploy to Cloudflare Pages
-        uses: Cyb3r-Jak3/actions-cloudflare-pages@<Latest Release>
+        uses: Cyb3r-Jak3/actions-cloudflare-pages@1
         with:
           account: ${{ secrets.CLOUDFLARE_ACCOUNT }}
           project: ${{ secrets.CLOUDFLARE_PROJECT }}
